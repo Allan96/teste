@@ -1,0 +1,50 @@
+<body>
+    <script src="https://checkoutshopper-live.adyen.com/checkoutshopper/sdk/5.6.2/adyen.js"
+    integrity="sha384-3odf4MrjtRxXA/Mtt7uHmron+SrI6p9zK1bbiwi+S1XEHFH/iMmmD8p5wuapvVZJ"
+    crossorigin="anonymous"></script>
+
+<link rel="stylesheet"
+    href="https://checkoutshopper-live.adyen.com/checkoutshopper/sdk/5.6.2/adyen.css"
+    integrity="sha384-dydHMPbkyrBI9MNt5AHdxmZ/MYs8H6JIxMraZ4Iew5HrlsbuhzCbrAsq9/tgxZBy"
+    crossorigin="anonymous">
+
+     <div id="component-container"></div>
+
+
+
+<script>
+     function handleOnChange(state, component) {
+       state.isValid // True or false. Specifies if all the information that the shopper provided is valid.
+       state.data // Provides the data that you need to pass in the `/payments` call.
+       component // Provides the active component instance that called this event.
+   }
+ 
+   function handleOnAdditionalDetails(state, component) {
+       state.data // Provides the data that you need to pass in the `/payments/details` call.
+       component // Provides the active component instance that called this event.
+   }
+ 
+   const configuration = {
+       locale: "pt_BR", // The shopper's locale. For a list of supported locales, see https://docs.adyen.com/online-payments/web-components/localization-components.
+       environment: "live", // When you're ready to accept live payments, change the value to one of our live environments https://docs.adyen.com/online-payments/components-web#testing-your-integration.  
+       clientKey: "AQEvhmfxLYzOaRxDw0m/n3Q5qf3Vfbh9LJBJV3BY0ij/yVLuYXBEVT7GIfrhfZ197dEQwV1bDb7kfNy1WIxIIkxgBw==-PydJjtDJQP4hYjoKdJg9865rRcbmPMb2KVAIZUz5wGQ=-cNx&%T{}REg2VM[x", // Your client key. To find out how to generate one, see https://docs.adyen.com/development-resources/client-side-authentication. Web Components versions before 3.10.1 use originKey instead of clientKey.
+       analytics: {
+         enabled: true // Set to false to not send analytics data to Adyen.
+       },
+       paymentMethodsResponse: {}, // The payment methods response returned in step 1.
+       onChange: handleOnChange, // Your function for handling onChange event
+       onAdditionalDetails: handleOnAdditionalDetails // Your function for handling onAdditionalDetails event
+   };
+   const startAdyen = async (configuration) => {
+    const checkout = await AdyenCheckout(configuration);
+    const card = checkout.create('card').mount('#component-container');
+   }
+
+   
+   startAdyen(configuration)
+
+   
+
+</script>
+
+</body>
