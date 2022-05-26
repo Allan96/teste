@@ -37,7 +37,7 @@
    };
    const startAdyen = async (configuration) => {
     const checkout = await AdyenCheckout(configuration);
-    // const card = checkout.create('card').mount('#component-container');
+    const card = checkout.create('card').mount('#component-container');
     const customCard = checkout.create('securedfields', {
     // Optional configuration
     type: 'card',
@@ -62,7 +62,7 @@
             iframeTitle: 'Iframe for secured card number',
             error: 'Message that gets read out when the field is in the error state'
         }
-    },
+    }, 
     // Events
     onChange: function(a) {
         console.log(a.data)
