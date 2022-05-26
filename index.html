@@ -15,8 +15,10 @@
 <script>
      function handleOnChange(state, component) {
        state.isValid // True or false. Specifies if all the information that the shopper provided is valid.
-       state.data // Provides the data that you need to pass in the `/payments` call.
+       console.log(state.data) // Provides the data that you need to pass in the `/payments` call.
        component // Provides the active component instance that called this event.
+
+    //    console.log()
    }
  
    function handleOnAdditionalDetails(state, component) {
